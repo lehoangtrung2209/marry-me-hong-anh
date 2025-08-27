@@ -6,4 +6,13 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: '/marry-me-hong-anh/', // 👈 quan trọng: đúng tên repo
   // plugins: [react()],
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        // Bỏ qua lỗi import không resolve được
+        if (warning.code === 'UNRESOLVED_IMPORT') return
+        warn(warning)
+      }
+    }
+  }
 })
